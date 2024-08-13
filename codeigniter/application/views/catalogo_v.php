@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="<?php echo site_url('proyecto_c'); ?>" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elementos</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -69,9 +69,9 @@
                             <a href="element.html" class="dropdown-item">Otros Elementos</a>
                         </div>
                     </div>
+                    <a href="<?php echo site_url('proyecto_c/listar'); ?>" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Proyectos</a> <!-- direcciona al listar -->
                     <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
                     <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Formularios</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tablas</a>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Gráficos</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Páginas</a>
@@ -86,6 +86,7 @@
             </nav>
         </div>
         <!-- Fin de la Barra Lateral -->
+
 
         <!-- Inicio del Contenido -->
         <div class="content">
@@ -180,53 +181,54 @@
             </nav>
             <!-- Fin de la Barra de Navegación -->
 
-            <!-- Inicio de Ventas y Ganancias -->
+            <!-- Inicio de Carreras -->
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
-                    <!-- Venta de Hoy -->
+                    <!-- Carrera de Contaduría Pública -->
                     <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-line fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Venta de Hoy</p>
-                                <h6 class="mb-0">$1234</h6>
+                        <a href="<?php echo base_url('ruta_a_contaduria'); ?>" class="text-decoration-none">
+                            <div class="bg-primary text-white rounded d-flex flex-column align-items-center justify-content-center p-4">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <i class="fa fa-book fa-4x"></i>
+                                    <i class="fa fa-pencil-alt fa-2x ms-2"></i> <!-- Icono de libro con lápiz -->
+                                </div>
+                                <h5 class="mb-0 mt-3 fs-3 text-center">Contaduría Pública</h5>
                             </div>
-                        </div>
+                        </a>
                     </div>
-                    <!-- Venta Total -->
+                    <!-- Carrera de Secretariado Ejecutivo -->
                     <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Venta Total</p>
-                                <h6 class="mb-0">$1234</h6>
+                        <a href="<?php echo base_url('ruta_a_secretariado'); ?>" class="text-decoration-none">
+                            <div class="bg-success text-white rounded d-flex flex-column align-items-center justify-content-center p-4">
+                                <i class="fa fa-file-alt fa-4x"></i>
+                                <h5 class="mb-0 mt-3 fs-3 text-center">Secretariado Ejecutivo</h5>
                             </div>
-                        </div>
+                        </a>
                     </div>
+                    <!-- Carrera de Sistemas Informáticos -->
+                    <div class="col-sm-6 col-xl-3">
+                        <a href="<?php echo base_url('ruta_a_sistemas'); ?>" class="text-decoration-none">
+                            <div class="bg-info text-white rounded d-flex flex-column align-items-center justify-content-center p-4">
+                                <i class="fa fa-desktop fa-4x"></i>
+                                <h5 class="mb-0 mt-3 fs-3 text-center">Sistemas Informáticos</h5>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Carrera de Marketing y Publicidad -->
+                    <div class="col-sm-6 col-xl-3">
+                        <a href="<?php echo base_url('ruta_a_marketing'); ?>" class="text-decoration-none">
+                            <div class="bg-warning text-white rounded d-flex flex-column align-items-center justify-content-center p-4">
+                                <i class="fa fa-bullhorn fa-4x"></i>
+                                <h5 class="mb-0 mt-3 fs-3 text-center">Marketing y Publicidad</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin de Carreras -->
 
-                   <!-- Ganancia de Hoy -->
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-area fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Ganancia de Hoy</p>
-                                <h6 class="mb-0">$1234</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Ganancia Total -->
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Ganancia Total</p>
-                                <h6 class="mb-0">$1234</h6>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    </div>
-                    <!-- Fin de Ventas y Ganancias -->
+
+
 
                     <!-- Inicio de Gráfico de Ventas -->
                     <div class="container-fluid pt-4 px-4">
