@@ -19,7 +19,7 @@ class Usuario_c extends CI_Controller {
   {
       //$this->load->view('temp/head');
      // $this->load->view('temp/menu');
-      $this->load->view('temp/v_agregarUsuario');
+      $this->load->view('agregarusuario_v');
      // $this->load->view('temp/test');
      // $this->load->view('temp/footer');
   }
