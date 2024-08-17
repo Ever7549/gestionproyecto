@@ -1,7 +1,7 @@
 <body>
     <?php $this->load->view('encabezado_v'); ?> <!-- Incluye el encabezado -->
     <?php $this->load->view('lateral_v'); ?> <!-- Incluye el menú lateral -->
-
+    
     <!-- Contenido principal -->
     <div class="content container-fluid pt-4 px-4">
         <div class="row g-4">

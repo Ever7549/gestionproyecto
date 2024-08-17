@@ -1,7 +1,7 @@
 
 
 <!-- Content Start -->
-<div class="container-fluid pt-4 px-4">
+<div>
     <div class="row g-4">
         <!-- Botón para agregar un nuevo proyecto -->
         <div class="col-12 mb-4">
@@ -24,6 +24,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        
                         <?php if (!empty($proyectos)) { ?>
                             <?php foreach ($proyectos->result() as $proyecto) { ?>
                                 <tr>
