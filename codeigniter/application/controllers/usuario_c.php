@@ -1,6 +1,4 @@
 
-
-
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -36,8 +34,11 @@ class Usuario_c extends CI_Controller {
     $data['correo']=$_POST['correov'];
     $data['telefono']=$_POST['telefonov'];
     $data['nombreUsuario']=$_POST['nombreUsuariov'];
-    $data['contrasena']=$_POST['contrasenav'];
+    $data['contrasena'] = sha1($_POST['contrasenav']);
     $data['estado']=$_POST['estadov'];
+    $data['usuarioCreador']=$_POST['usuarioCreadorv'];
+    $data['carrera_idcarrera']=$_POST['carrera_idcarrerav'];
+    $data['rol_idrol']=$_POST['rol_idrolv'];
 
     $this->Usuario_model->agregarusuario($data);
     redirect('Usuario_c/m_listar','refresh');//REDIRECIONA

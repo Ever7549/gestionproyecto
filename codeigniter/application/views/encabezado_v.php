@@ -41,7 +41,7 @@
         <!-- Fin del Spinner -->
 
         <!-- Inicio del Contenido -->
-        <div>
+        <div class="container-fluid pt-4 px-1">
             <!-- Inicio de la Barra de Navegación -->
             <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
                 <a href="#" class="navbar-brand d-flex d-lg-none me-4">

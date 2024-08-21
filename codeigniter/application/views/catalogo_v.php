@@ -1,9 +1,10 @@
 <body>
-    <?php $this->load->view('encabezado_v'); ?> <!-- Incluye el encabezado -->
+    
     <?php $this->load->view('lateral_v'); ?> <!-- Incluye el menú lateral -->
     
     <!-- Contenido principal -->
-    <div class="content container-fluid pt-4 px-4">
+    <div class="content container-fluid px-4">
+        <?php $this->load->view('encabezado_v'); ?> <!-- Incluye el encabezado -->
         <div class="row g-4">
             <!-- Inicio de Carreras -->
             <div class="col-md-12">
