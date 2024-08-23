@@ -29,16 +29,13 @@ class Proyecto_model extends CI_Model {
     }
 
     // Método para recuperar un proyecto por ID
-    public function recuperar_proyecto($idproyecto)
+    public function recuperar_proyecto($idProyecto)
     {
         $this->db->select('*');
         $this->db->from('proyecto');
-        $this->db->join('carrera', 'proyecto.carrera_idcarrera = carrera.idcarrera');
-        $this->db->join('modalidad', 'proyecto.modalidad_idmodalidad = modalidad.idmodalidad');
-        $this->db->join('tutor', 'proyecto.tutor_idtutor = tutor.idtutor');
-        $this->db->join('usuario', 'proyecto.usuarioCreador = usuario.idusuario');
-        $this->db->where('idproyecto', $idproyecto);
-        return $this->db->get()->row(); // Devuelve el resultado como un solo objeto
+        $this->db->where('idproyecto', $idProyecto);
+        $query = $this->db->get();
+        return $query->row(); // Devuelve un único objeto
     }
 
     // Método para modificar un proyecto

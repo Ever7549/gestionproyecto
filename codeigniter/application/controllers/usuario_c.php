@@ -10,23 +10,14 @@ class Usuario_c extends CI_Controller {
         $this->load->model('Usuario_model'); // Cargar el modelo
         $listar=$this->Usuario_model->listadeusuarios();
         $data['usuario']=$listar;
-        //$this->load->view('temp/head');
-	      //$this->load->view('temp/menu');
         $this->load->view('usuario_v',$data);
-        // $this->load->view('temp/test');
-	      // $this->load->view('temp/footer');
     }
      public function agregar()
   {
-      //$this->load->view('temp/head');
-     // $this->load->view('temp/menu');
       $this->load->view('agregarusuario_v');
-     // $this->load->view('temp/test');
-     // $this->load->view('temp/footer');
   }
   public function agregarbd()
   {
-    //$this->load->model('Libros_model'); 
     $this->load->model('Usuario_model');
     $data['nombres']=strtoupper($_POST['nombresv']);
     $data['primerApellido']=strtoupper($_POST['primerApellidov']);
@@ -79,3 +70,4 @@ class Usuario_c extends CI_Controller {
 		redirect('Usuario_c/m_listar','refresh');
 	}
 }
+
