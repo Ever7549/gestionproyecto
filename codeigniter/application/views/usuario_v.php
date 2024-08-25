@@ -71,11 +71,9 @@
                                         <td><?php echo $row->contrasena; ?></td>
                                         <td><?php echo $row->estado; ?></td>
                                         <td>
-                                            <?php echo form_open("usuario_c/modificar"); ?>
-                                            <input type="hidden" name="idusuario" value="<?php echo $row->idusuario; ?>">
-                                            <button type="submit" class="btn btn-warning btn-sm">Editar</button>
-                                            <?php echo form_close(); ?>
+                                            <a href="<?php echo site_url('Usuario_c/modificar/'.$row->idusuario); ?>" class="btn btn-warning btn-sm">Editar</a>
                                         </td>
+
                                         <td>
                                             <?php echo form_open("usuario_c/eliminarbd"); ?>
                                             <input type="hidden" name="idusuario" value="<?php echo $row->idusuario; ?>">

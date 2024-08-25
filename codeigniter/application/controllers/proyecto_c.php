@@ -46,8 +46,6 @@ class Proyecto_c extends CI_Controller {
         $data['infoproyecto'] = $this->Proyecto_model->recuperar_proyecto($idproyecto); // Usar el nombre correcto del método
         $this->load->view('modificar_proyecto_v', $data); // Cargar la vista de modificar proyecto
     }
-
-
     public function modificarbd()
     {
         $this->load->model('Proyecto_model');

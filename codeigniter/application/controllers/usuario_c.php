@@ -8,8 +8,7 @@ class Usuario_c extends CI_Controller {
     public function m_listar()
 	{
         $this->load->model('Usuario_model'); // Cargar el modelo
-        $listar=$this->Usuario_model->listadeusuarios();
-        $data['usuario']=$listar;
+        $data['usuario']=$this->Usuario_model->listadeusuarios();
         $this->load->view('usuario_v',$data);
     }
      public function agregar()
@@ -27,7 +26,7 @@ class Usuario_c extends CI_Controller {
     $data['nombreUsuario']=$_POST['nombreUsuariov'];
     $data['contrasena'] = sha1($_POST['contrasenav']);
     $data['estado']=$_POST['estadov'];
-    $data['usuarioCreador']=$_POST['usuarioCreadorv'];
+   // $data['usuarioCreador']=$_POST['usuarioCreadorv'];
     $data['carrera_idcarrera']=$_POST['carrera_idcarrerav'];
     $data['rol_idrol']=$_POST['rol_idrolv'];
 
@@ -41,33 +40,34 @@ class Usuario_c extends CI_Controller {
   $this->Usuario_model->eliminarusuario($idusuario);
   redirect('Usuario_c/m_listar','refresh');//REDIRECIONA
   }
-  public function modificar()
+  public function modificar($idusuario)
   {
     $this->load->model('Usuario_model');
-    $idUsuario=$_POST['idusuario'];
-    //echo $idlibro;
-	  $data['infousuario']=$this->Usuario_model->recuperarusuario($idusuario);
-   // $this->load->view('temp/head');
-    //$this->load->view('temp/menu');
-    $this->load->view('temp/v_modificarUsuario',$data);
-    //$this->load->view('temp/test');
-   // $this->load->view('temp/footer');
+    // Recuperar la información del usuario usando el ID
+    $data['infousuario'] = $this->Usuario_model->recuperarusuario($idusuario);
+    // Cargar la vista de modificación y pasar los datos del usuario
+    $this->load->view('modificar_usuario_v', $data);
   }
-	public function modificarbd()
-	{
+  public function modificarbd()
+  {
     $this->load->model('Usuario_model');
-	  $idusuario=$_POST['idusuario'];
-      $data['nombres']=strtoupper($_POST['nombresv']);
-      $data['primerApellido']=strtoupper($_POST['primerApellidov']);
-      $data['segundoApellido']=strtoupper($_POST['segundoApellidov']);
-      $data['correo']=$_POST['correov'];
-      $data['telefono']=$_POST['telefonov'];
-      $data['nombreUsuario']=$_POST['nombreUsuariov'];
-      $data['contrasena']=$_POST['contrasenav'];
-      $data['estado']=$_POST['estadov'];
+    $idusuario = $this->input->post('idusuario');
+    $data = array(
+        'nombres' => strtoupper($this->input->post('nombres')),
+        'primerApellido' => strtoupper($this->input->post('primerApellido')),
+        'segundoApellido' => strtoupper($this->input->post('segundoApellido')),
+        'correo' => $this->input->post('correo'),
+        'telefono' => $this->input->post('telefono'),
+        'nombreUsuario' => $this->input->post('nombreUsuario'),
+        //'contrasena' => sha1($this->input->post('contrasena')),
+        'estado' => $this->input->post('estado')
+    );
 
-		$this->Usuario_model->modificarusuario($idusuario,$data);
-		redirect('Usuario_c/m_listar','refresh');
-	}
+    // Llama al método modificar_usuario con el ID y los datos
+    $this->Usuario_model->modificar_usuario($idusuario, $data);
+    redirect('usuario_c/m_listar', 'refresh');
+  }
+
+
 }
 

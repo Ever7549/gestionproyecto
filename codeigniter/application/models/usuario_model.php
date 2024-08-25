@@ -13,23 +13,24 @@ class Usuario_model extends CI_Model {
      {
          $this->db->insert('usuario',$data);
      }
-     public function eliminarusuario($idusuario)
-     {
+     public function cambiar_estado_usuario($idusuario,$estado)
+    {
         $this->db->where('idusuario',$idusuario);
-        $this->db->delete('usuario');
-     } 
-     public function recuperarusuario($idusuario)
-	{
-		$this->db->select('*');
-		$this->db->from('usuario');
-		$this->db->where('idusuario',$idusuario);
-		return $this->db->get(); //devuelve el resultado
-	}
+        $this->db->update('usuario',array('estado'=>$estado));
+    } 
+    public function recuperarusuario($idusuario)
+    {
+    $this->db->select('*');
+    $this->db->from('usuario');
+    $this->db->where('idusuario', $idusuario);
+    $query=$this->db->get();
+    return $query->row(); // devuelve el resultado
+    }
+    public function modificar_usuario($idusuario, $data)
+    {
+    $this->db->where('idusuario', $idusuario);
+    $this->db->update('usuario', $data);
+    }
 
-	public function modificarusuario($idusuario,$data)
-	{
-		$this->db->where('idusuario',$idusuario);
-		$this->db->update('usuario',$data);
-	}
 
 }
