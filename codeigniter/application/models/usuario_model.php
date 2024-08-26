@@ -31,6 +31,10 @@ class Usuario_model extends CI_Model {
     $this->db->where('idusuario', $idusuario);
     $this->db->update('usuario', $data);
     }
-
+    public function eliminar_usuario($idusuario)
+    {
+        $this->db->where('idusuario', $idusuario);
+        $this->db->delete('usuario'); // Elimina el usuario de la tabla 'usuario'
+    }
 
 }

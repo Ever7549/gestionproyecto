@@ -43,16 +43,18 @@
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>N°</th>
                                     <th>Nombres</th>
                                     <th>Primer Apellido</th>
                                     <th>Segundo Apellido</th>
                                     <th>Correo</th>
                                     <th>Teléfono</th>
                                     <th>Nombre Usuario</th>
-                                    <th>Contraseña</th>
+                                    <!--th>Contraseña</th -->
                                     <th>Estado</th>
-                                    <th colspan="2">Acciones</th> <!-- Combine columns for actions -->
+                                    <!--th colspan="2">Acciones</th> <!- Combine columns for actions -->
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,7 +70,7 @@
                                         <td><?php echo $row->correo; ?></td>
                                         <td><?php echo $row->telefono; ?></td>
                                         <td><?php echo $row->nombreUsuario; ?></td>
-                                        <td><?php echo $row->contrasena; ?></td>
+                                        <!--<td>< ?php echo $row->contrasena; ?></td -->
                                         <td><?php echo $row->estado; ?></td>
                                         <td>
                                             <a href="<?php echo site_url('Usuario_c/modificar/'.$row->idusuario); ?>" class="btn btn-warning btn-sm">Editar</a>

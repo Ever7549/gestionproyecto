@@ -44,4 +44,10 @@ class Proyecto_model extends CI_Model {
         $this->db->where('idproyecto', $idproyecto);
         $this->db->update('proyecto', $data);
     }
+    public function eliminar_proyecto($idProyecto)
+    {
+        $this->db->where('idproyecto', $idProyecto);
+        $this->db->delete('proyecto'); // Eliminar el proyecto de la base de datos
+    }
+
 }

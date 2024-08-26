@@ -28,7 +28,8 @@
                                         <th>Gestión</th>
                                         <th>Resumen</th>
                                         <th>Estado</th>
-                                        <th>Acciones</th>
+                                        <th>Modificar</th>
+                                        <th>Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,9 +47,9 @@
                                                     <a href="<?php echo site_url('Proyecto_c/modificar/'.$proyecto->idproyecto); ?>" class="btn btn-warning">
                                                         <i class="bi bi-pencil-square"></i> Modificar
                                                     </a>
-                                                    <a href="<?php echo site_url('Proyecto_c/ver/'.$proyecto->idproyecto); ?>" class="btn btn-info">
-                                                        <i class="bi bi-eye"></i> Ver
-                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <!-- Botones CRUD -->
                                                     <form action="<?php echo site_url('Proyecto_c/eliminarbd'); ?>" method="post" style="display:inline;">
                                                         <input type="hidden" name="idProyecto" value="<?php echo $proyecto->idproyecto; ?>">
                                                         <button type="submit" class="btn btn-danger">

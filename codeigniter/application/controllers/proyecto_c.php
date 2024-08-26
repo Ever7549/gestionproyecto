@@ -18,25 +18,32 @@ class Proyecto_c extends CI_Controller {
     public function agregarbd()
     {
         $this->load->model('Proyecto_model');
-        $data['titulo']=strtoupper($_POST['titulov']);
-        $data['egresado']=strtoupper($_POST['egresadov']);
-        $data['gestion']=strtoupper($_POST['gestionv']);
-        $data['resumen']=strtoupper($_POST['resumenv']);
-        $data['estado']=strtoupper($_POST['estadov']);
-        $data['usuarioCreador']=strtoupper($_POST['usuarioCreadorv']);
-        $data['carrera_idcarrera']=$_POST['carrera_idcarrerav'];
-        $data['modalidad_idmodalidad']=$_POST['modalidad_idmodalidadv'];
-        $data['tutor_idtutor']=$_POST['tutor_idtutorv'];
+        $data['titulo'] = strtoupper($_POST['titulov']);
+        $data['egresado'] = strtoupper($_POST['egresadov']);
+        $data['gestion'] = strtoupper($_POST['gestionv']);
+        $data['resumen'] = strtoupper($_POST['resumenv']);
+        $data['estado'] = strtoupper($_POST['estadov']);
+        $data['usuarioCreador'] = strtoupper($_POST['usuarioCreadorv']);
+        $data['carrera_idcarrera'] = $_POST['carrera_idcarrerav'];
+        $data['modalidad_idmodalidad'] = $_POST['modalidad_idmodalidadv'];
+        $data['tutor_idtutor'] = $_POST['tutor_idtutorv'];
 
         $this->Proyecto_model->agregar_proyecto($data); // Llamar al método correcto
         redirect('Proyecto_c/listar', 'refresh'); // Redireccionar a la lista de proyectos
     }
 
-    public function eliminar()
+    public function eliminar($idproyecto)
+    {
+        $this->load->model('Proyecto_model');
+        $this->Proyecto_model->eliminar_proyecto($idproyecto); // Eliminar el proyecto usando el modelo
+        redirect('Proyecto_c/listar', 'refresh'); // Redireccionar a la lista de proyectos
+    }
+
+    public function eliminarbd()
     {
         $idProyecto = $this->input->post('idProyecto');
         $this->load->model('Proyecto_model');
-        $this->Proyecto_model->cambiar_estado_proyecto($idProyecto, 0); // Cambiar el estado del proyecto a inactivo (0)
+        $this->Proyecto_model->eliminar_proyecto($idProyecto); // Llamar al método de eliminación en el modelo
         redirect('Proyecto_c/listar', 'refresh'); // Redireccionar a la lista de proyectos
     }
 
@@ -46,6 +53,7 @@ class Proyecto_c extends CI_Controller {
         $data['infoproyecto'] = $this->Proyecto_model->recuperar_proyecto($idproyecto); // Usar el nombre correcto del método
         $this->load->view('modificar_proyecto_v', $data); // Cargar la vista de modificar proyecto
     }
+
     public function modificarbd()
     {
         $this->load->model('Proyecto_model');
@@ -66,4 +74,3 @@ class Proyecto_c extends CI_Controller {
         redirect('proyecto_c/listar', 'refresh'); // Redireccionar a la lista de proyectos
     }
 }
-
