@@ -8,7 +8,6 @@
             <div class="col-12">
                 <div class="bg-secondary rounded h-100 p-4">
                 
-                
                     <!-- Botón para agregar un nuevo proyecto -->
                     <div class="col-12 mb-4">
                         <a href="<?php echo site_url('Proyecto_c/agregar'); ?>" class="btn btn-primary">
@@ -22,7 +21,7 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>N°</th>
                                         <th>Título</th>
                                         <th>Egresado</th>
                                         <th>Gestión</th>
@@ -33,10 +32,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (!empty($proyectos)) { ?>
+                                    <?php 
+                                    $contador = 1; // Inicializar el contador
+                                    if (!empty($proyectos)) { ?>
                                         <?php foreach ($proyectos->result() as $proyecto) { ?>
                                             <tr>
-                                                <td><?php echo $proyecto->idproyecto; ?></td>
+                                                <td><?php echo $contador++; ?></td> <!-- Mostrar el número de fila -->
                                                 <td><?php echo $proyecto->titulo; ?></td>
                                                 <td><?php echo $proyecto->egresado; ?></td>
                                                 <td><?php echo $proyecto->gestion; ?></td>
@@ -61,7 +62,7 @@
                                         <?php } ?>
                                     <?php } else { ?>
                                         <tr>
-                                            <td colspan="7">No hay proyectos registrados.</td>
+                                            <td colspan="8">No hay proyectos registrados.</td> <!-- Ajustado colspan a 8 -->
                                         </tr>
                                     <?php } ?>
                                 </tbody>
@@ -73,8 +74,6 @@
             <?php $this->load->view('pie_v'); ?> <!-- Incluye pie de página -->
         </div> <!-- Fin de .row -->
     </div> <!-- Fin de .content -->
-
-    
 
     <!-- Volver al Inicio -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
