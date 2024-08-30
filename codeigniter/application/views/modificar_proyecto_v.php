@@ -40,8 +40,13 @@
               <div class="row mb-3">
                 <div class="col-md-6">
                   <label for="estado" class="form-label">Estado</label>
-                  <input type="text" class="form-control" id="estado" name="estado" placeholder="Escribe el estado" value="<?php echo $infoproyecto->estado; ?>" required>
+                  <select class="form-control" id="estado" name="estado" required>
+                    <option value="activo" <?php echo $infoproyecto->estado == 'activo' ? 'selected' : ''; ?>>Activo</option>
+                    <option value="inactivo" <?php echo $infoproyecto->estado == 'inactivo' ? 'selected' : ''; ?>>Inactivo</option>
+                  </select>
                 </div>
+              </div>
+              
                 <div class="col-md-6">
                   <label for="usuarioCreador" class="form-label">Usuario Creador</label>
                   <input type="text" class="form-control" id="usuarioCreador" name="usuarioCreador" placeholder="Escribe el usuario creador" value="<?php echo $infoproyecto->usuarioCreador; ?>" required>

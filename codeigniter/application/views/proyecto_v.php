@@ -26,7 +26,8 @@
                                         <th>Egresado</th>
                                         <th>Gestión</th>
                                         <th>Resumen</th>
-                                        <th>Estado</th>
+                                        <th>Tutor</th>
+                                        <th>Carrera</th>
                                         <th>Modificar</th>
                                         <th>Eliminar</th>
                                     </tr>
@@ -42,7 +43,9 @@
                                                 <td><?php echo $proyecto->egresado; ?></td>
                                                 <td><?php echo $proyecto->gestion; ?></td>
                                                 <td><?php echo $proyecto->resumen; ?></td>
-                                                <td><?php echo $proyecto->estado ? 'Activo' : 'Inactivo'; ?></td>
+                                                <td><?php echo $proyecto->tutor_idtutor; ?></td>
+                                                <td><?php echo $proyecto->carrera_idcarrera; ?></td>
+                                                <!--td>< ?php echo $proyecto->estado ? 'Activo' : 'Inactivo'; ?></td-->
                                                 <td>
                                                     <!-- Botones CRUD -->
                                                     <a href="<?php echo site_url('Proyecto_c/modificar/'.$proyecto->idproyecto); ?>" class="btn btn-warning">

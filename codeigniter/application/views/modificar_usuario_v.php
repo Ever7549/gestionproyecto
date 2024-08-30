@@ -50,14 +50,14 @@
 
               <div class="row mb-3">
                 <div class="col-md-6">
-                  <label for="estado" class="form-label">Estado</label>
-                  <select class="form-select" id="estado" name="estado" required>
-                    <option value="activo" <?php echo $infousuario->estado == 'activo' ? 'selected' : ''; ?>>Activo</option>
-                    <option value="inactivo" <?php echo $infousuario->estado == 'inactivo' ? 'selected' : ''; ?>>Inactivo</option>
-                  </select>
+                    <label for="estado" class="form-label">Estado</label>
+                    <select class="form-select" id="estado" name="estado" required>
+                        <option value="1" <?php echo $infousuario->estado == '1' ? 'selected' : ''; ?>>Activo</option>
+                        <option value="0" <?php echo $infousuario->estado == '0' ? 'selected' : ''; ?>>Inactivo</option>
+                    </select>
                 </div>
-              </div>
-
+            </div>
+            
               <div class="mb-3">
                 <button type="submit" class="btn btn-success">Guardar Cambios</button>
                 <a href="javascript:history.back()" class="btn btn-secondary">Cancelar</a>
