@@ -40,9 +40,9 @@
               <div class="row mb-3">
                 <div class="col-md-6">
                   <label for="estado" class="form-label">Estado</label>
-                  <select class="form-control" id="estado" name="estado" required>
-                    <option value="activo" <?php echo $infoproyecto->estado == 'activo' ? 'selected' : ''; ?>>Activo</option>
-                    <option value="inactivo" <?php echo $infoproyecto->estado == 'inactivo' ? 'selected' : ''; ?>>Inactivo</option>
+                  <select class="form-select" id="estado" name="estado" required>
+                    <option value="1" <?php echo $infoproyecto->estado == '1' ? 'selected' : ''; ?>>Activo</option>
+                    <option value="0" <?php echo $infoproyecto->estado == '0' ? 'selected' : ''; ?>>Inactivo</option>
                   </select>
                 </div>
               </div>
@@ -69,7 +69,7 @@
               </div>
 
               <div class="mb-3">
-                <button type="submit" class="btn btn-success">Modificar Proyecto</button>
+                <button type="submit" class="btn btn-success">Guardar Cambios</button>
                 <a href="javascript:history.back()" class="btn btn-secondary">Cancelar</a>
               </div>
             <?php echo form_close(); ?>

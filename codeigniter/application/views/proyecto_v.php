@@ -43,17 +43,14 @@
                                                 <td><?php echo $proyecto->egresado; ?></td>
                                                 <td><?php echo $proyecto->gestion; ?></td>
                                                 <td><?php echo $proyecto->resumen; ?></td>
-                                                <td><?php echo $proyecto->tutor_idtutor; ?></td>
-                                                <td><?php echo $proyecto->carrera_idcarrera; ?></td>
-                                                <!--td>< ?php echo $proyecto->estado ? 'Activo' : 'Inactivo'; ?></td-->
+                                                <td><?php echo $proyecto->nombre_tutor; ?></td> <!-- Mostrando el nombre del tutor -->
+                                                <td><?php echo $proyecto->nombre_carrera; ?></td> <!-- Mostrando el nombre de la carrera -->
                                                 <td>
-                                                    <!-- Botones CRUD -->
                                                     <a href="<?php echo site_url('Proyecto_c/modificar/'.$proyecto->idproyecto); ?>" class="btn btn-warning">
                                                         <i class="bi bi-pencil-square"></i> Modificar
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <!-- Botones CRUD -->
                                                     <form action="<?php echo site_url('Proyecto_c/eliminarbd'); ?>" method="post" style="display:inline;">
                                                         <input type="hidden" name="idProyecto" value="<?php echo $proyecto->idproyecto; ?>">
                                                         <button type="submit" class="btn btn-danger">
@@ -65,7 +62,7 @@
                                         <?php } ?>
                                     <?php } else { ?>
                                         <tr>
-                                            <td colspan="8">No hay proyectos registrados.</td> <!-- Ajustado colspan a 8 -->
+                                            <td colspan="8">No hay proyectos registrados.</td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

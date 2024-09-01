@@ -47,11 +47,25 @@ class Proyecto_c extends CI_Controller {
         redirect('Proyecto_c/listar', 'refresh'); // Redireccionar a la lista de proyectos
     }
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Proyecto_model');
+    }
+
     public function modificar($idproyecto)
     {
-        $this->load->model('Proyecto_model');
-        $data['infoproyecto'] = $this->Proyecto_model->recuperar_proyecto($idproyecto); // Usar el nombre correcto del método
-        $this->load->view('modificar_proyecto_v', $data); // Cargar la vista de modificar proyecto
+        // Obtener el proyecto actual
+        $data['proyecto'] = $this->Proyecto_model->recuperar_proyecto($idproyecto);
+
+        // Obtener todas las carreras
+        $data['carreras'] = $this->Proyecto_model->obtener_carreras();
+
+        // Obtener todos los tutores
+        $data['tutores'] = $this->Proyecto_model->obtener_tutores();
+
+        // Cargar la vista
+        $this->load->view('modificar_proyecto_v', $data);
     }
 
     public function modificarbd()
