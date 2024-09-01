@@ -47,44 +47,50 @@ class Proyecto_c extends CI_Controller {
         redirect('Proyecto_c/listar', 'refresh'); // Redireccionar a la lista de proyectos
     }
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('Proyecto_model');
-    }
 
-    public function modificar($idproyecto)
-    {
-        // Obtener el proyecto actual
-        $data['proyecto'] = $this->Proyecto_model->recuperar_proyecto($idproyecto);
 
-        // Obtener todas las carreras
-        $data['carreras'] = $this->Proyecto_model->obtener_carreras();
 
-        // Obtener todos los tutores
-        $data['tutores'] = $this->Proyecto_model->obtener_tutores();
 
-        // Cargar la vista
-        $this->load->view('modificar_proyecto_v', $data);
-    }
+        public function __construct() {
+            parent::__construct();
+            $this->load->model('Proyecto_model');
+            $this->load->model('Carrera_model');
+            $this->load->model('Tutor_model');
+        }
+    
 
-    public function modificarbd()
-    {
-        $this->load->model('Proyecto_model');
-        $idproyecto = $this->input->post('idproyecto');
-        $data = array(
-            'titulo' => strtoupper($this->input->post('titulo')),
-            'egresado' => strtoupper($this->input->post('egresado')),
-            'gestion' => $this->input->post('gestion'),
-            'resumen' => strtoupper($this->input->post('resumen')),
-            'estado' => $this->input->post('estado'),
-            'usuarioCreador' => $this->input->post('usuarioCreador'),
-            'carrera_idcarrera' => $this->input->post('carrera_idcarrera'),
-            'modalidad_idmodalidad' => $this->input->post('modalidad_idmodalidad'),
-            'tutor_idtutor' => $this->input->post('tutor_idtutor')
-        );
+        public function modificar($idproyecto) {
+            // Obtener los datos del proyecto
+            $data['infoproyecto'] = $this->Proyecto_model->recuperar_proyecto($idproyecto);
+            $data['carreras'] = $this->Carrera_model->obtener_carreras();
+            $data['tutores'] = $this->Tutor_model->obtener_tutores();
+            
+            // Cargar la vista
+            $this->load->view('modificar_proyecto_v', $data);
+        }
+    
+        public function modificarbd()
+        {
+            // Obtener los datos del formulario
+            $idproyecto = $this->input->post('idproyecto');
+            $data = array(
+                'titulo' => strtoupper($this->input->post('titulo')),
+                'egresado' => strtoupper($this->input->post('egresado')),
+                'gestion' => $this->input->post('gestion'),
+                'resumen' => strtoupper($this->input->post('resumen')),
+                'estado' => $this->input->post('estado'),
+                'usuarioCreador' => $this->input->post('usuarioCreador'), // Asegúrate de que este campo se está manejando correctamente
+                'carrera_idcarrera' => $this->input->post('carrera_idcarrera'),
+                'modalidad_idmodalidad' => $this->input->post('modalidad_idmodalidad'),
+                'tutor_idtutor' => $this->input->post('tutor_idtutor')
+            );
 
-        $this->Proyecto_model->modificar_proyecto($idproyecto, $data); // Usar el nombre correcto del método
-        redirect('proyecto_c/listar', 'refresh'); // Redireccionar a la lista de proyectos
-    }
+            // Llamar al método de modelo para actualizar el proyecto
+            $this->Proyecto_model->modificar_proyecto($idproyecto, $data);
+
+            // Redireccionar a la lista de proyectos
+            redirect('Proyecto_c/listar', 'refresh');
+        }
+    
+    
 }

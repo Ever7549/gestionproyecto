@@ -45,18 +45,24 @@
                     <option value="0" <?php echo $infoproyecto->estado == '0' ? 'selected' : ''; ?>>Inactivo</option>
                   </select>
                 </div>
-              </div>
-              
-                <div class="col-md-6">
-                  <label for="usuarioCreador" class="form-label">Usuario Creador</label>
-                  <input type="text" class="form-control" id="usuarioCreador" name="usuarioCreador" placeholder="Escribe el usuario creador" value="<?php echo $infoproyecto->usuarioCreador; ?>" required>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="usuarioCreador" class="form-label">Usuario Creador</label>
+                        <input type="text" class="form-control" id="usuarioCreador" name="usuarioCreador" value="<?php echo $infoproyecto->usuarioCreador; ?>" required>
+                    </div>
                 </div>
               </div>
-
+              
               <div class="row mb-3">
                 <div class="col-md-4">
                   <label for="carrera_idcarrera" class="form-label">Carrera</label>
-                  <input type="text" class="form-control" id="carrera_idcarrera" name="carrera_idcarrera" placeholder="Escribe el ID de carrera" value="<?php echo $infoproyecto->carrera_idcarrera; ?>" required>
+                  <select class="form-select" id="carrera_idcarrera" name="carrera_idcarrera" required>
+                    <?php foreach ($carreras as $carrera): ?>
+                      <option value="<?php echo $carrera->idcarrera; ?>" <?php echo $infoproyecto->carrera_idcarrera == $carrera->idcarrera ? 'selected' : ''; ?>>
+                        <?php echo $carrera->nombreCarrera; ?>
+                      </option>
+                    <?php endforeach; ?>
+                  </select>
                 </div>
                 <div class="col-md-4">
                   <label for="modalidad_idmodalidad" class="form-label">Modalidad</label>
@@ -64,7 +70,13 @@
                 </div>
                 <div class="col-md-4">
                   <label for="tutor_idtutor" class="form-label">Tutor</label>
-                  <input type="text" class="form-control" id="tutor_idtutor" name="tutor_idtutor" placeholder="Escribe el ID de tutor" value="<?php echo $infoproyecto->tutor_idtutor; ?>" required>
+                  <select class="form-select" id="tutor_idtutor" name="tutor_idtutor" required>
+                    <?php foreach ($tutores as $tutor): ?>
+                      <option value="<?php echo $tutor->idtutor; ?>" <?php echo $infoproyecto->tutor_idtutor == $tutor->idtutor ? 'selected' : ''; ?>>
+                        <?php echo $tutor->nombres . ' ' . $tutor->apellidos; ?>
+                      </option>
+                    <?php endforeach; ?>
+                  </select>
                 </div>
               </div>
 

@@ -5,15 +5,15 @@ class Proyecto_model extends CI_Model {
 
     // Método para obtener la lista de proyectos
     public function obtener_proyectos()
-    {
-        $this->db->select('proyecto.*, carrera.nombreCarrera as nombre_carrera, CONCAT(tutor.nombres, " ", tutor.apellidos) as nombre_tutor, CONCAT(usuario.nombres, " ", usuario.primerApellido, " ", usuario.segundoApellido) as nombre_usuario');
-        $this->db->from('proyecto');
-        $this->db->join('carrera', 'proyecto.carrera_idcarrera = carrera.idcarrera');
-        $this->db->join('modalidad', 'proyecto.modalidad_idmodalidad = modalidad.idmodalidad');
-        $this->db->join('tutor', 'proyecto.tutor_idtutor = tutor.idtutor');
-        $this->db->join('usuario', 'proyecto.usuarioCreador = usuario.idusuario');
-        return $this->db->get(); // Devuelve el resultado como un objeto CI_DB_result
-    }
+{
+    $this->db->select('proyecto.*, carrera.nombreCarrera as nombre_carrera, CONCAT(tutor.nombres, " ", tutor.apellidos) as nombre_tutor, CONCAT(usuario.nombres, " ", usuario.primerApellido, " ", usuario.segundoApellido) as nombre_usuario');
+    $this->db->from('proyecto');
+    $this->db->join('carrera', 'proyecto.carrera_idcarrera = carrera.idcarrera');
+    $this->db->join('modalidad', 'proyecto.modalidad_idmodalidad = modalidad.idmodalidad');
+    $this->db->join('tutor', 'proyecto.tutor_idtutor = tutor.idtutor');
+    $this->db->join('usuario', 'proyecto.usuarioCreador = usuario.idusuario', 'left'); // Asegúrate de usar 'left' si el campo puede ser NULL
+    return $this->db->get(); // Devuelve el resultado como un objeto CI_DB_result
+}
         // Método para obtener todas las carreras
     public function obtener_carreras()
     {
@@ -46,20 +46,19 @@ class Proyecto_model extends CI_Model {
     }
 
     // Método para recuperar un proyecto por ID
-    public function recuperar_proyecto($idProyecto)
-    {
-        $this->db->select('*');
-        $this->db->from('proyecto');
-        $this->db->where('idproyecto', $idProyecto);
-        $query = $this->db->get();
-        return $query->row(); // Devuelve un único objeto
+
+    public function recuperar_proyecto($idproyecto) {
+        $this->db->where('idproyecto', $idproyecto);
+        $query = $this->db->get('proyecto');
+        return $query->row(); // Debería devolver una fila de resultados
     }
 
     // Método para modificar un proyecto
+
     public function modificar_proyecto($idproyecto, $data)
     {
-        $this->db->where('idproyecto', $idproyecto);
-        $this->db->update('proyecto', $data);
+    $this->db->where('idproyecto', $idproyecto);
+    $this->db->update('proyecto', $data);
     }
     public function eliminar_proyecto($idProyecto)
     {
