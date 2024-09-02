@@ -22,6 +22,13 @@ class Proyecto_model extends CI_Model {
         $query = $this->db->get();
         return $query->result(); // Devuelve el resultado como un array de objetos
     }
+    public function obtener_modalidades()
+    {
+        $this->db->select('idmodalidad, nombreModalidad');
+        $this->db->from('modalidad');
+        $query = $this->db->get();
+        return $query->result(); // Devuelve el resultado como un array de objetos
+    }
 
     // Método para obtener todos los tutores
     public function obtener_tutores()

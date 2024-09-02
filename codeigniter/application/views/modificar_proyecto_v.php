@@ -64,10 +64,25 @@
                     <?php endforeach; ?>
                   </select>
                 </div>
+
+
                 <div class="col-md-4">
                   <label for="modalidad_idmodalidad" class="form-label">Modalidad</label>
-                  <input type="text" class="form-control" id="modalidad_idmodalidad" name="modalidad_idmodalidad" placeholder="Escribe el ID de modalidad" value="<?php echo $infoproyecto->modalidad_idmodalidad; ?>" required>
+                  <select class="form-select" id="modalidad_idmodalidad" name="modalidad_idmodalidad" required>
+                    <?php foreach ($modalidades as $modalidad): ?>
+                      <option value="<?php echo $modalidad->idmodalidad; ?>" <?php echo $infoproyecto->modalidad_idmodalidad == $modalidad->idmodalidad ? 'selected' : ''; ?>>
+                        <?php echo $modalidad->nombreModalidad; ?>
+                      </option>
+                    <?php endforeach; ?>
+                  </select>
                 </div>
+
+
+                <!--div class="col-md-4">
+                  <label for="modalidad_idmodalidad" class="form-label">Modalidad</label>
+                  <input type="text" class="form-control" id="modalidad_idmodalidad" name="modalidad_idmodalidad" placeholder="Escribe el ID de modalidad" value="<?php echo $infoproyecto->modalidad_idmodalidad; ?>" required>
+                </div-->
+
                 <div class="col-md-4">
                   <label for="tutor_idtutor" class="form-label">Tutor</label>
                   <select class="form-select" id="tutor_idtutor" name="tutor_idtutor" required>

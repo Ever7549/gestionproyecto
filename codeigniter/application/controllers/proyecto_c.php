@@ -56,6 +56,7 @@ class Proyecto_c extends CI_Controller {
             $this->load->model('Proyecto_model');
             $this->load->model('Carrera_model');
             $this->load->model('Tutor_model');
+            $this->load->model('Modalidad_model'); 
         }
     
 
@@ -64,6 +65,7 @@ class Proyecto_c extends CI_Controller {
             $data['infoproyecto'] = $this->Proyecto_model->recuperar_proyecto($idproyecto);
             $data['carreras'] = $this->Carrera_model->obtener_carreras();
             $data['tutores'] = $this->Tutor_model->obtener_tutores();
+            $data['modalidades'] = $this->Modalidad_model->obtener_modalidades();
             
             // Cargar la vista
             $this->load->view('modificar_proyecto_v', $data);
