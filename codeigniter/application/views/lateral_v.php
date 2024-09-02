@@ -26,6 +26,8 @@
             </div>
             <a href="<?php echo site_url('proyecto_c/listar'); ?>" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Proyectos</a> <!-- direcciona al listar -->
             <a href="<?php echo site_url('usuario_c/m_listar'); ?>" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Usuarios</a> <!-- direcciona al listar -->
+            <a href="<?php echo site_url('tutor_c/listar'); ?>" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tutores</a> <!-- direcciona al listar -->
+            <a href="<?php echo site_url('carrera_c/listar'); ?>" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Carreras</a> <!-- direcciona al listar -->
             <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
             <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Formularios</a>
             <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Gráficos</a>

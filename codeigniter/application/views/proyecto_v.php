@@ -4,7 +4,7 @@
     <!-- Content Start -->
     <div class="content container-fluid px-4">
         <?php $this->load->view('encabezado_v'); ?> <!-- Incluye el encabezado -->
-        <div class="row g-4">
+        <div class="row g-0">
             <div class="col-12">
                 <div class="bg-secondary rounded h-100 p-4">
                 
