@@ -91,7 +91,6 @@
                     <div class="mt-4">
                         <a href="<?php echo base_url(); ?>index.php/login_c/logout" class="btn btn-warning">Cerrar Sesión</a>
                         <a href="<?php echo base_url(); ?>index.php/login_c/panel" class="btn btn-warning">Volver</a>
-                        <a href="<?php echo base_url(); ?>index.php/carrera_c/agregar" class="btn btn-primary">Agregar Carrera</a>
                         <a href="<?php echo site_url('Proyecto_c/agregar'); ?>" class="btn btn-primary"><i class="bi bi-plus"></i> Agregar Proyecto</a>      
                     </div>
                 </div>

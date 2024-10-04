@@ -45,6 +45,7 @@
                                     <label for="estudiante1" class="form-label">Estudiante</label>
                                     <input type="text" class="form-control" id="estudiante1" name="estudiante1" placeholder="Escribe el estudiante" value="<?php echo $infoproyecto->estudiante1; ?>" required>
                                   </div>
+                                  
                                   <div class="col-md-4">
                                     <label for="estudiante2" class="form-label">Estudiante</label>
                                     <input type="text" class="form-control" id="estudiante2" name="estudiante2" placeholder="Escribe el estudiante" value="<?php echo $infoproyecto->estudiante2; ?>">
@@ -55,44 +56,43 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                  <div class="col-md-4">
-                                    <label for="gestion" class="form-label">Gestión</label>
-                                    <input type="text" class="form-control" id="gestion" name="gestion" placeholder="Escribe la gestión" value="<?php echo $infoproyecto->gestion; ?>" required>
-                                  </div>
-                                  <div class="col-md-4">
+                                  <div class="col-md-3">
                                     <label for="referencia" class="form-label">Referencia</label>
                                     <textarea class="form-control" id="referencia" name="referencia" rows="3" placeholder="Escribe el referencia" required><?php echo $infoproyecto->referencia; ?></textarea>
                                   </div>
-                                  <div class="col-md-4">
+                                  <div class="col-md-9">
                                     <label for="resumen" class="form-label">Resumen</label>
                                     <textarea class="form-control" id="resumen" name="resumen" rows="3" placeholder="Escribe el resumen" required><?php echo $infoproyecto->resumen; ?></textarea>
                                   </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                  <div class="row mb-3">
-                                      <div class="col-md-6">
-                                          <label for="ubicacion" class="form-label">Ubicacion</label>
-                                          <input type="text" class="form-control" id="ubicacion" name="ubicacion" value="<?php echo $infoproyecto->ubicacion; ?>" required>
-                                      </div>
+                                  <div class="col-md-2">
+                                    <label for="gestion" class="form-label">Gestión</label>
+                                    <input type="text" class="form-control" id="gestion" name="gestion" placeholder="Escribe la gestión" value="<?php echo $infoproyecto->gestion; ?>" required>
                                   </div>
-                                  <div class="col-md-3">
+                                  
+                                  <div class="col-md-2">
+                                    <label for="ubicacion" class="form-label">Ubicacion</label>
+                                    <input type="text" class="form-control" id="ubicacion" name="ubicacion" value="<?php echo $infoproyecto->ubicacion; ?>" required>
+                                  </div>
+                                  
+                                  <div class="col-md-2">
                                     <label for="estado" class="form-label">Estado</label>
                                     <select class="form-select" id="estado" name="estado" required>
                                       <option value="1" <?php echo $infoproyecto->estado == '1' ? 'selected' : ''; ?>>Activo</option>
                                       <option value="0" <?php echo $infoproyecto->estado == '0' ? 'selected' : ''; ?>>Inactivo</option>
                                     </select>
                                   </div>
-                                  <div class="row mb-3">
-                                      <div class="col-md-6">
-                                          <label for="usuarioCreador" class="form-label">Usuario Creador</label>
-                                          <input type="text" class="form-control" id="usuarioCreador" name="usuarioCreador" value="<?php echo $infoproyecto->usuarioCreador; ?>" required>
-                                      </div>
+                                  
+                                  <div class="col-md-6">
+                                    <label for="usuarioCreador" class="form-label">Usuario Creador</label>
+                                    <input type="text" class="form-control" id="usuarioCreador" name="usuarioCreador" value="<?php echo $infoproyecto->usuarioCreador; ?>" required>
                                   </div>
                                 </div>
                                 
                                 <div class="row mb-3">
-                                  <div class="col-md-4">
+                                  <div class="col-md-3">
                                     <label for="carrera_id" class="form-label">Carrera</label>
                                     <select class="form-select" id="carrera_id" name="carrera_id" required>
                                       <?php foreach ($carreras as $carrera): ?>
@@ -103,8 +103,7 @@
                                     </select>
                                   </div>
 
-
-                                  <div class="col-md-4">
+                                  <div class="col-md-3">
                                     <label for="modalidad_id" class="form-label">Modalidad</label>
                                     <select class="form-select" id="modalidad_id" name="modalidad_id" required>
                                       <?php foreach ($modalidades as $modalidad): ?>
@@ -115,13 +114,7 @@
                                     </select>
                                   </div>
 
-
-                                  <!--div class="col-md-4">
-                                    <label for="modalidad_idmodalidad" class="form-label">Modalidad</label>
-                                    <input type="text" class="form-control" id="modalidad_idmodalidad" name="modalidad_idmodalidad" placeholder="Escribe el ID de modalidad" value="<?php echo $infoproyecto->modalidad_idmodalidad; ?>" required>
-                                  </div-->
-
-                                  <div class="col-md-9">
+                                  <div class="col-md-6">
                                     <label for="tutor_id" class="form-label">Tutor</label>
                                     <select class="form-select" id="tutor_id" name="tutor_id" required>
                                       <?php foreach ($tutores as $tutor): ?>
@@ -134,9 +127,10 @@
                                 </div>
 
                                 <div class="mb-3">
-                                  <button type="submit" class="btn btn-success">Guardar Cambios</button>
-                                  <a href="javascript:history.back()" class="btn btn-secondary">Cancelar</a>
+                                  <button type="submit" class="btn btn-outline-info py-3 mb-4">Guardar</button>
+                                  <a href="javascript:history.back()" class="btn btn-outline-danger py-3 mb-4">Cancelar</a>
                                 </div>
+
                               <?php echo form_close(); ?>
                             </thead>
                         </table>
