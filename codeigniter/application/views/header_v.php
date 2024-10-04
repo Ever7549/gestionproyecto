@@ -28,4 +28,5 @@
 
     <!-- Template Stylesheet -->
     <link href="<?php echo base_url('template/css/style.css'); ?>" rel="stylesheet">
+    
 </head>

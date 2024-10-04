@@ -82,21 +82,27 @@ class Proyecto_c extends CI_Controller {
         public function modificarbd()
         {
             // Obtener los datos del formulario
-            $idproyecto = $this->input->post('idproyecto');
+            $id = $this->input->post('id');
             $data = array(
+                'codigo' => strtoupper($this->input->post('codigo')),
                 'titulo' => strtoupper($this->input->post('titulo')),
-                'egresado' => strtoupper($this->input->post('egresado')),
+                'estudiante1' => strtoupper($this->input->post('estudiante1')),
+                'estudiante2' => strtoupper($this->input->post('estudiante2')),
+                'estudiante3' => strtoupper($this->input->post('estudiante3')),
                 'gestion' => $this->input->post('gestion'),
+                'referencia' => strtoupper($this->input->post('referencia')),
                 'resumen' => strtoupper($this->input->post('resumen')),
+                'ubicacion' => strtoupper($this->input->post('ubicacion')),
                 'estado' => $this->input->post('estado'),
                 'usuarioCreador' => $this->input->post('usuarioCreador'), // Asegúrate de que este campo se está manejando correctamente
-                'carrera_idcarrera' => $this->input->post('carrera_idcarrera'),
-                'modalidad_idmodalidad' => $this->input->post('modalidad_idmodalidad'),
-                'tutor_idtutor' => $this->input->post('tutor_idtutor')
+                'carrera_id' => $this->input->post('carrera_id'),
+                'modalidad_id' => $this->input->post('modalidad_id'),
+                'tutor_id' => $this->input->post('tutor_id')
             );
 
             // Llamar al método de modelo para actualizar el proyecto
-            $this->Proyecto_model->modificar_proyecto($idproyecto, $data);
+            $this->Proyecto_model->modificar_proyecto($id, $data); 
+
 
             // Redireccionar a la lista de proyectos
             redirect('Proyecto_c/listar', 'refresh');

@@ -7,7 +7,7 @@ class Proyecto_model extends CI_Model {
     public function obtener_proyectos()
     {
         // Define la consulta SQL
-        $sql = "SELECT p.codigo,p.titulo,p.estudiante1,p.estudiante2,p.estudiante3,p.gestion,p.referencia,p.resumen,
+        $sql = "SELECT p.id,p.codigo,p.titulo,p.estudiante1,p.estudiante2,p.estudiante3,p.gestion,p.referencia,p.resumen,
                     p.ubicacion,c.nombreCarrera,m.nombreModalidad,
                 CONCAT(t.profesion, ' ', t.nombre, ' ', t.primerApellido, ' ', t.segundoApellido)AS tutor_info
             FROM gestionproyecto2.proyecto p
