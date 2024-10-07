@@ -19,7 +19,6 @@ class Modalidad_c extends CI_Controller {
     {
         $this->load->model('Modalidad_model');
         $data['nombreModalidad'] = strtoupper($_POST['nombreModalidadv']);
-        $data['estado'] = strtoupper($_POST['estadov']);
 
         $this->Modalidad_model->agregar_modalidad($data); // Llamar al método correcto
         redirect('Modalidad_c/listar', 'refresh'); // Redireccionar a la lista de proyectos
@@ -36,7 +35,7 @@ class Modalidad_c extends CI_Controller {
     {
         $id = $this->input->post('id');
         $this->load->model('Modalidad_model');
-        $this->Modalidad_model->eliminar_modalidad($id); // Llamar al método de eliminación en el modelo
+        $this->Modalidad_model->cambiar_estado_modalidad($id); // Llamar al método de eliminación en el modelo
         redirect('Modalidad_c/listar', 'refresh'); // Redireccionar a la lista de proyectos
     }
 
@@ -60,10 +59,9 @@ class Modalidad_c extends CI_Controller {
         $this->load->model('Modalidad_model');
         
         // Obtener los datos del formulario
-        $idmodalidad = $this->input->post('id');
+        $id = $this->input->post('id');
         $data = array(
             'nombreModalidad' => strtoupper($this->input->post('nombreModalidad')),
-            'estado' => $this->input->post('estado'),
         );
 
         // Llamar al método de modelo para actualizar el tutor

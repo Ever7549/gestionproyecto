@@ -19,27 +19,23 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Editar Carrera</h6>
+                        <h6 class="mb-0">Agregar Proyectos</h6>
                         <a href="#">Mostrar Todo</a>
                     </div>
 
                     <div class="table-responsive"> <!-- Hacemos la tabla responsiva -->
-                        <table id="tablaProyectos" class="table table-striped table-bordered table-hover small text-nowrap"> <!-- Reducimos tamaño y evitamos quiebres de línea -->
-                          <thead>
-                            <?php echo form_open_multipart("carrera_c/modificarbd"); ?>
-                                <input type="hidden" name="id" value="<?php echo $infocarrera->id; ?>">
-
+                        <table class="table table-striped table-bordered table-hover small text-nowrap"> <!-- Reducimos tamaño y evitamos quiebres de línea -->
+                            <thead>
+                            <?php echo form_open("Carrera_c/agregarbd"); ?>
                                 <div class="row mb-3">
                                   <div class="col-md-6">
-                                    <label for="titulo" class="form-label">Nombre Carrera</label>
-                                    <input type="text" class="form-control" id="nombreCarrera" name="nombreCarrera" placeholder="Escribe la Carrera" value="<?php echo $infocarrera->nombreCarrera; ?>" required>
+                                    <label for="nombreCarrerav" class="form-label"> Nombre Carrera</label>
+                                    <input type="text" class="form-control" id="nombreCarrerav" name="nombreCarrerav" placeholder="NombreCarrera" required>
                                   </div>
                                 </div>
-                                  <button type="submit" class="btn btn-success">Guardar Cambios</button>
-                                  <a href="javascript:history.back()" class="btn btn-secondary">Cancelar</a>
-                                </div>
+                                <button type="submit" class="btn btn-success">Agregar Carrera</button>
                               <?php echo form_close(); ?>
-                          </thead>
+                            </thead>
                         </table>
                     </div>
                 </div>

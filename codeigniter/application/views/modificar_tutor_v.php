@@ -19,26 +19,43 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Editar Carrera</h6>
+                        <h6 class="mb-0">Editar Tutor</h6>
                         <a href="#">Mostrar Todo</a>
                     </div>
 
                     <div class="table-responsive"> <!-- Hacemos la tabla responsiva -->
                         <table id="tablaProyectos" class="table table-striped table-bordered table-hover small text-nowrap"> <!-- Reducimos tamaño y evitamos quiebres de línea -->
                           <thead>
-                            <?php echo form_open_multipart("carrera_c/modificarbd"); ?>
-                                <input type="hidden" name="id" value="<?php echo $infocarrera->id; ?>">
+                            <?php echo form_open_multipart("tutor_c/modificarbd"); ?>
+                              <input type="hidden" name="id" value="<?php echo $infotutor->id; ?>">
 
-                                <div class="row mb-3">
-                                  <div class="col-md-6">
-                                    <label for="titulo" class="form-label">Nombre Carrera</label>
-                                    <input type="text" class="form-control" id="nombreCarrera" name="nombreCarrera" placeholder="Escribe la Carrera" value="<?php echo $infocarrera->nombreCarrera; ?>" required>
-                                  </div>
+                              <div class="row mb-3">
+                                <div class="col-md-4">
+                                  <label for="nombre" class="form-label">Nombres</label>
+                                  <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Escribe los nombres" value="<?php echo $infotutor->nombre; ?>" required>
                                 </div>
-                                  <button type="submit" class="btn btn-success">Guardar Cambios</button>
-                                  <a href="javascript:history.back()" class="btn btn-secondary">Cancelar</a>
+                                <div class="col-md-4">
+                                  <label for="primerApellido" class="form-label">Primer Apellido</label>
+                                  <input type="text" class="form-control" id="primerApellido" name="primerApellido" placeholder="Escribe primer apellido" value="<?php echo $infotutor->primerApellido; ?>" required>
                                 </div>
-                              <?php echo form_close(); ?>
+                                <div class="col-md-4">
+                                  <label for="segundoApellido" class="form-label">Segundo Apellido</label>
+                                  <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" placeholder="Escribe segundo apellido" value="<?php echo $infotutor->segundoApellido; ?>">
+                                </div>
+                              </div>
+                              
+                              <div class="row mb-3">
+                                <div class="col-md-4">
+                                  <label for="profesion" class="form-label">Profesion</label>
+                                  <input type="text" class="form-control" id="profesion" name="profesion" placeholder="Escribe la profesion" value="<?php echo $infotutor->profesion; ?>" required>
+                                </div>
+                              </div>
+
+                              <div class="mb-3">
+                                <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                                <a href="javascript:history.back()" class="btn btn-secondary">Cancelar</a>
+                              </div>
+                            <?php echo form_close(); ?>
                           </thead>
                         </table>
                     </div>

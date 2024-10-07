@@ -18,12 +18,21 @@ class Carrera_c extends CI_Controller {
     public function agregarbd()
     {
         $this->load->model('Carrera_model');
-        $data['nombreCarrera'] = strtoupper($_POST['nombreCarrerav']);
-        $data['estado'] = strtoupper($_POST['estadov']);
-
-        $this->Carrera_model->agregar_carrera($data); // Llamar al método correcto
-        redirect('Carrera_c/listar', 'refresh'); // Redireccionar a la lista de proyectos
+        $estado_predeterminado = 1; // Estado como activo
+        
+        // Crear el array correctamente
+        $data = [
+            'nombreCarrera' => strtoupper($this->input->post('nombreCarrerav')), // Evitar el uso directo de $_POST
+            'estado' => $estado_predeterminado // Agregar estado predeterminado dentro del array
+        ];
+    
+        // Llamar al método agregar_carrera
+        $this->Carrera_model->agregar_carrera($data);
+    
+        // Redireccionar a la lista de carreras
+        redirect('Carrera_c/listar', 'refresh');
     }
+    
 
     public function eliminar($id)
     {
@@ -36,7 +45,7 @@ class Carrera_c extends CI_Controller {
     {
         $id = $this->input->post('id');
         $this->load->model('Carrera_model');
-        $this->Carrera_model->eliminar_carrera($id); // Llamar al método de eliminación en el modelo
+        $this->Carrera_model->cambiar_estado_carrera($id); // Llamar al método de eliminación en el modelo
         redirect('Carrera_c/listar', 'refresh'); // Redireccionar a la lista de proyectos
     }
 
@@ -60,10 +69,9 @@ class Carrera_c extends CI_Controller {
         $this->load->model('Carrera_model');
         
         // Obtener los datos del formulario
-        $idcarrera = $this->input->post('id');
+        $id = $this->input->post('id');
         $data = array(
             'nombreCarrera' => strtoupper($this->input->post('nombreCarrera')),
-            'estado' => $this->input->post('estado'),
         );
 
         // Llamar al método de modelo para actualizar el tutor

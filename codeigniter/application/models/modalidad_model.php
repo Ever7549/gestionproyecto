@@ -23,10 +23,31 @@ class Modalidad_model extends CI_Model {
     }
  
      // Método para cambiar el estado de un proyecto (en lugar de eliminar)
-     public function cambiar_estado_modalidad($id, $estado)
+     public function cambiar_estado_modalidad($id)
      {
-         $this->db->where('id', $id);
-         $this->db->update('modalidad', array('estado' => $estado));
+        // Obtenemos el estado actual del proyecto
+        $this->db->select('estado');
+        $this->db->from('modalidad');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+       
+        if ($query->num_rows() > 0) {
+            // Obtenemos el estado actual
+            $estado_actual = $query->row()->estado;
+       
+               // Alternamos el estado
+            $nuevo_estado = ($estado_actual == 1) ? 0 : 1;
+       
+               // Actualizamos el estado en la base de datos
+            $this->db->where('id', $id);
+            $this->db->update('modalidad', array('estado' => $nuevo_estado));
+       
+               // Puedes agregar un mensaje de éxito aquí si lo deseas
+               // Ejemplo: $this->session->set_flashdata('mensaje', 'Estado actualizado con éxito.');
+           } else {
+               // Manejar el caso en que no se encuentra el proyecto
+               // Ejemplo: $this->session->set_flashdata('error', 'Proyecto no encontrado.');
+           }
      }
  
      // Método para recuperar un proyecto por ID

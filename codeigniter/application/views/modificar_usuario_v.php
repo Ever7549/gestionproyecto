@@ -65,7 +65,7 @@
                                   <div class="row mb-3">
                                     <div class="col-md-4">
                                         <label for="rol" class="form-label">Rol de Usuario</label>
-                                        <select class="form-control" id="rol" name="rol" required>
+                                        <select class="form-control bg-dark" id="rol" name="rol" required>
                                             <!-- Opción para mostrar el rol actual -->
                                             <option value="<?php echo $infousuario->rol; ?>" selected>
                                                 <?php echo $infousuario->rol; ?>

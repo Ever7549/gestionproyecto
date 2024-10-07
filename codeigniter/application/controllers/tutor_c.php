@@ -40,7 +40,7 @@ class Tutor_c extends CI_Controller {
     {
         $id = $this->input->post('id');
         $this->load->model('Tutor_model');
-        $this->Tutor_model->eliminar_tutor($id); // Llamar al método de eliminación en el modelo
+        $this->Tutor_model->cambiar_estado_tutor($id); // Llamar al método de eliminación en el modelo
         redirect('Tutor_c/listar', 'refresh'); // Redireccionar a la lista de proyectos
     }
 
@@ -71,7 +71,6 @@ class Tutor_c extends CI_Controller {
             'primerApellido' => strtoupper($this->input->post('primerApellido')),
             'segundoApellido' => strtoupper($this->input->post('segundoApellido')),
             'profesion' => strtoupper($this->input->post('profesion')),
-            'estado' => $this->input->post('estado'),
         );
 
         // Llamar al método de modelo para actualizar el tutor
