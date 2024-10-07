@@ -6,7 +6,7 @@ class Tutor_c extends CI_Controller {
     public function listar()
     {
         $this->load->model('Tutor_model'); // Cargar el modelo
-        $data['tutores'] = $this->Tutor_model->obtener_tutores(); // Obtener la lista de proyectos usando el nombre correcto del método
+        $data['tutores'] = $this->Tutor_model->obtene_tutores(); // Obtener la lista de proyectos usando el nombre correcto del método
         $this->load->view('tutor_v', $data); // Cargar la vista con los datos
     }
 

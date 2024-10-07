@@ -8,14 +8,23 @@ class Tutor_model extends CI_Model {
         $this->db->from('usuario');
         return $this->db->get(); // devuelve resultado
     }
-    public function obtener_tutores() 
+    public function obtene_tutores() 
     {
-        $this->db->select('tutor.id, tutor.nombre, tutor.primerApellido, tutor.segundoApellido, tutor.profesion');
+        $this->db->select("tutor.id,tutor.profesion,' ', tutor.nombre, ' ', tutor.primerApellido, ' ', tutor.segundoApellido");
         $this->db->from('tutor');  // Tabla principal
         $this->db->where('tutor.estado', 1);  // Filtrar por tutores activos
         $query = $this->db->get();  // Ejecutar la consulta
         return $query->result();  // Devolver los resultados como un array de objetos
     }
+    public function obtener_tutores() 
+    {
+        $this->db->select("tutor.id, CONCAT(tutor.profesion,' ', tutor.nombre, ' ', tutor.primerApellido, ' ', tutor.segundoApellido) AS tutorCompleto");
+        $this->db->from('tutor');  // Tabla principal
+        $this->db->where('tutor.estado', 1);  // Filtrar por tutores activos
+        $query = $this->db->get();  // Ejecutar la consulta
+        return $query->result();  // Devolver los resultados como un array de objetos
+    }
+
 
      // Método para agregar un nuevo proyecto
      public function agregar_tutor($data)

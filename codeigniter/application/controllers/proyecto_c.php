@@ -12,12 +12,26 @@ class Proyecto_c extends CI_Controller {
 
     public function agregar()
     {
-        $this->load->view('agregarproyecto_v'); // Cargar la vista de agregar proyecto
+        $this->load->model('Carrera_model'); // Cargar el modelo de carrera
+        $data['carreras'] = $this->Carrera_model->obtener_carreras(); // Obtener las carreras
+
+        $this->load->model('Modalidad_model'); // Cargar el modelo de carrera
+        $data['modalidades'] = $this->Modalidad_model->obtener_modalidades(); // Obtener las carreras
+        // Pasar los datos de las carreras a la vista
+
+        $this->load->model('Tutor_model'); // Cargar el modelo de carrera
+        $data['tutores'] = $this->Tutor_model->obtener_tutores(); // Obtener las carreras
+        // Pasar los datos de las carreras a la vista
+        $this->load->view('agregarproyecto_v', $data); // Asegúrate de pasar $data
     }
+
 
     public function agregarbd()
     {
         $this->load->model('Proyecto_model');
+        $estado_predeterminado = 1; // Estado como activo
+        $fecha_actual = date('Y-m-d H:i:s'); // Fecha y hora actual
+        
         $data['codigo'] = strtoupper($_POST['codigov']);
         $data['titulo'] = strtoupper($_POST['titulov']);
         $data['estudiante1'] = strtoupper($_POST['estudiante1v']);
@@ -27,10 +41,10 @@ class Proyecto_c extends CI_Controller {
         $data['referencia'] = strtoupper($_POST['referenciav']);
         $data['resumen'] = strtoupper($_POST['resumenv']);
         $data['ubicacion'] = strtoupper($_POST['ubicacionv']);
-        $data['estado'] = strtoupper($_POST['estadov']);
-        $data['fechaRegistro'] = strtoupper($_POST['fechaRegistrov']);
-        $data['ultimaActualizacion'] = strtoupper($_POST['ultimaActualizacionv']);
-        $data['usuarioCreador'] = strtoupper($_POST['usuarioCreadorv']);
+        $data['estado'] = ($estado_predeterminado);
+        $data['fechaRegistro'] = ($fecha_actual);
+        $data['ultimaActualizacion'] = ($fecha_actual);
+        $data['usuarioCreador'] = ($_POST['usuarioCreadorv']);
         $data['carrera_id'] = $_POST['carrera_idv'];
         $data['modalidad_id'] = $_POST['modalidad_idv'];
         $data['tutor_id'] = $_POST['tutor_idv'];
@@ -51,11 +65,21 @@ class Proyecto_c extends CI_Controller {
     {
         $id = $this->input->post('id');
         $this->load->model('Proyecto_model');
-        $this->Proyecto_model->eliminar_proyecto($id); // Llamar al método de eliminación en el modelo
+        $this->Proyecto_model->cambiar_estado_proyecto($id); // Llamar al método de eliminación en el modelo
         redirect('Proyecto_c/listar', 'refresh'); // Redireccionar a la lista de proyectos
     }
 
-
+    public function actualizar_estado($id) 
+    {
+        $resultado = $this->Modelo_m->cambiar_estado($id);
+        
+        // Verificamos si la actualización fue exitosa
+        if ($resultado) {
+            echo "Estado cambiado exitosamente.";
+        } else {
+            echo "Error al cambiar el estado.";
+        }
+    }
 
 
 

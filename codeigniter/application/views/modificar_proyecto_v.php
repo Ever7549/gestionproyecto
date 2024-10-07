@@ -76,15 +76,6 @@
                                     <label for="ubicacion" class="form-label">Ubicacion</label>
                                     <input type="text" class="form-control" id="ubicacion" name="ubicacion" value="<?php echo $infoproyecto->ubicacion; ?>" required>
                                   </div>
-                                  
-                                  <div class="col-md-2">
-                                    <label for="estado" class="form-label">Estado</label>
-                                    <select class="form-select" id="estado" name="estado" required>
-                                      <option value="1" <?php echo $infoproyecto->estado == '1' ? 'selected' : ''; ?>>Activo</option>
-                                      <option value="0" <?php echo $infoproyecto->estado == '0' ? 'selected' : ''; ?>>Inactivo</option>
-                                    </select>
-                                  </div>
-                                  
                                   <div class="col-md-6">
                                     <label for="usuarioCreador" class="form-label">Usuario Creador</label>
                                     <input type="text" class="form-control" id="usuarioCreador" name="usuarioCreador" value="<?php echo $infoproyecto->usuarioCreador; ?>" required>
@@ -119,7 +110,8 @@
                                     <select class="form-select" id="tutor_id" name="tutor_id" required>
                                       <?php foreach ($tutores as $tutor): ?>
                                         <option value="<?php echo $tutor->id; ?>" <?php echo $infoproyecto->tutor_id == $tutor->id ? 'selected' : ''; ?>>
-                                          <?php echo $tutor->profesion . ' ' .$tutor->nombre . ' ' . $tutor->primerApellido. ' ' . $tutor->segundoApellido; ?>
+                                          <?php echo $tutor->tutorCompleto; ?>
+                                          
                                         </option>
                                       <?php endforeach; ?>
                                     </select>
