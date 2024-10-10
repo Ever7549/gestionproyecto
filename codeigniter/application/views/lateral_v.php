@@ -39,6 +39,7 @@
                     <a href="<?php echo site_url('tutor_c/listar'); ?>" class="dropdown-item">Tutores</a>
                     <a href="<?php echo site_url('carrera_c/listar'); ?>" class="dropdown-item">Carreras</a>
                     <a href="<?php echo site_url('modalidad_c/listar'); ?>" class="dropdown-item">Modalidades</a>
+                    <a href="<?php echo site_url('prestamo_c/index'); ?>" class="dropdown-item">Prestamos</a>
                 </div>
             </div>
 
