@@ -101,4 +101,15 @@ class Proyecto_model extends CI_Model {
         $this->db->delete('proyecto'); // Eliminar el proyecto de la base de datos
     }
 
+    public function obtener_proyectos_disponibles() {
+        $this->db->select('*');
+        $this->db->from('proyecto');
+        $this->db->where('estado', 1); // Proyectos disponibles
+        return $this->db->get()->result();
+    }
+
+    public function buscar_por_codigo($codigo) {
+        return $this->db->get_where('proyecto', array('codigo' => $codigo))->row();
+    }
+
 }

@@ -1,4 +1,4 @@
-<?php
+<!-- ?php
 class Prestamo_c extends CI_Controller {
 
     public function __construct() {
@@ -54,4 +54,76 @@ class Prestamo_c extends CI_Controller {
         $this->Prestamo_model->eliminar_prestamo($id);
         redirect('prestamo_c');
     }
+} -- !>
+<?php
+class Prestamo_c extends CI_Controller {
+
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('Prestamo_model');
+    }
+
+    // Vista inicial del sistema de préstamos
+    public function index() {
+        $data['proyectos'] = $this->Prestamo_model->obtener_proyectos();
+        $this->load->view('prestamo_v', $data);
+    }
+
+    // Buscar proyecto por código
+    public function buscar_proyecto() {
+        $codigo = $this->input->post('codigo');
+        $data['proyecto'] = $this->Prestamo_model->obtener_proyecto_por_codigo($codigo);
+        $this->load->view('prestamo_detalle_v', $data);
+    }
+
+    // Registrar un nuevo préstamo
+    public function registrar_prestamo() {
+        $proyectoId = $this->input->post('proyecto_id');
+        $estudianteId = $this->input->post('estudiante_id');
+        
+        // Datos del préstamo
+        $dataPrestamo = array(
+            'fechaPrestamo' => date('Y-m-d H:i:s'),
+            'fechaDevolucion' => $this->input->post('fechaDevolucion'),
+            'estado' => 1,  // Disponible
+            'observacion' => $this->input->post('observacion'),
+            'usuario_id' => $estudianteId
+        );
+
+        // Guardar el préstamo
+        $prestamoId = $this->Prestamo_model->registrar_prestamo($dataPrestamo);
+
+        // Guardar en la tabla prestamoproyecto
+        $dataPrestamoProyecto = array(
+            'proyecto_id' => $proyectoId,
+            'prestamo_id' => $prestamoId,
+            'estado' => 1,  // Disponible
+            'observacion' => $this->input->post('observacion')
+        );
+        
+        $this->Prestamo_model->registrar_prestamo_proyecto($dataPrestamoProyecto);
+        redirect('prestamo_c/index');
+    }
+
+    // Cambiar estado a "Prestado"
+    public function cambiar_a_prestado($prestamoId) {
+        $data = array('observacion' => 'Proyecto Prestado');
+        $this->Prestamo_model->actualizar_estado_prestamo($prestamoId, 2, $data);  // 2 para "Prestado"
+        redirect('prestamo_c/index');
+    }
+
+    // Cambiar estado a "Devuelto"
+    public function cambiar_a_devuelto($prestamoId) {
+        $data = array('observacion' => 'Proyecto Devuelto');
+        $this->Prestamo_model->actualizar_estado_prestamo($prestamoId, 3, $data);  // 3 para "Devuelto"
+        redirect('prestamo_c/index');
+    }
+
+    // Buscar estudiante
+    public function buscar_estudiante() {
+        $criterio = $this->input->post('criterio');
+        $data['estudiantes'] = $this->Prestamo_model->buscar_estudiante($criterio);
+        $this->load->view('buscar_estudiante_v', $data);
+    }
 }
+
