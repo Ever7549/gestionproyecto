@@ -35,11 +35,12 @@
                 </a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="<?php echo site_url('proyecto_c/listar'); ?>" class="dropdown-item">Proyectos</a>
+                    <a href="<?php echo site_url('estudiante_c/listar'); ?>" class="dropdown-item">Estudiantes</a>
                     <a href="<?php echo site_url('usuario_c/m_listar'); ?>" class="dropdown-item">Usuarios</a>
                     <a href="<?php echo site_url('tutor_c/listar'); ?>" class="dropdown-item">Tutores</a>
                     <a href="<?php echo site_url('carrera_c/listar'); ?>" class="dropdown-item">Carreras</a>
                     <a href="<?php echo site_url('modalidad_c/listar'); ?>" class="dropdown-item">Modalidades</a>
-                    <a href="<?php echo site_url('prestamo_c/index'); ?>" class="dropdown-item">Prestamos</a>
+                    <a href="<?php echo site_url('prestamo_c/listar'); ?>" class="dropdown-item">Prestamos</a>
                 </div>
             </div>
 

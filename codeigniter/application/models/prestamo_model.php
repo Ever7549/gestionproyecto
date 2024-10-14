@@ -70,49 +70,85 @@ class Prestamo_model extends CI_Model {
 } -- !>
 <?php
 class Prestamo_model extends CI_Model {
-    
-    // Obtener proyectos por código
-    public function obtener_proyecto_por_codigo($codigo) {
-        $this->db->where('codigo', $codigo);
-        return $this->db->get('proyecto')->row();
+
+    public function __construct() {
+        parent::__construct();
+        $this->load->database(); // Carga la base de datos
     }
 
-    // Obtener todos los proyectos con sus detalles
-    public function obtener_proyectos() {
-        $this->db->select('id, codigo, titulo, ubicacion, estado');
-        return $this->db->get('proyecto')->result();
+    // Obtener todos los préstamos activos (estado = 1), incluyendo detalles del estudiante y del proyecto
+    public function obtenerPrestamos() {
+        $sql = "SELECT p.id, e.nombre, e.primerApellido, e.segundoApellido, pr.titulo, p.fechaPrestamo, p.fechaDevolucion, p.fechaRealDevolucion, p.estado, p.observacion 
+                FROM prestamo p
+                INNER JOIN prestamoestudiante pe ON p.id = pe.prestamo_id
+                INNER JOIN estudiante e ON pe.estudiante_id = e.id
+                INNER JOIN prestamoproyecto pp ON p.id = pp.prestamo_id
+                INNER JOIN proyecto pr ON pp.proyecto_id = pr.id
+                WHERE p.estado = 1";
+        $query = $this->db->query($sql);
+        return $query->result_array(); // Devuelve los resultados como un array asociativo
     }
 
-    // Registrar un préstamo de proyecto
-    public function registrar_prestamo($data) {
-        $this->db->insert('prestamo', $data);
-        return $this->db->insert_id();  // Retorna el ID del préstamo creado
+    // Obtener préstamo por su ID, incluyendo detalles del estudiante y proyecto
+    public function obtenerPrestamoPorId($id) {
+        $sql = "SELECT p.id, e.nombre, e.primerApellido, e.segundoApellido, pr.titulo, p.fechaPrestamo, p.fechaDevolucion, p.fechaRealDevolucion, p.estado, p.observacion 
+                FROM prestamo p
+                INNER JOIN prestamoestudiante pe ON p.id = pe.prestamo_id
+                INNER JOIN estudiante e ON pe.estudiante_id = e.id
+                INNER JOIN prestamoproyecto pp ON p.id = pp.prestamo_id
+                INNER JOIN proyecto pr ON pp.proyecto_id = pr.id
+                WHERE p.id = ?";
+        $query = $this->db->query($sql, array($id));
+        return $query->row_array(); // Devuelve una fila como array asociativo
     }
 
-    // Registrar detalles del préstamo de proyecto
-    public function registrar_prestamo_proyecto($data) {
-        return $this->db->insert('prestamoproyecto', $data);
+    // Insertar un nuevo préstamo y asociar al estudiante y proyecto
+    public function insertarPrestamo($dataPrestamo, $dataEstudiantes, $dataProyectos) {
+        $this->db->trans_start();  // Iniciar transacción
+
+        // Insertar en la tabla `prestamo`
+        $this->db->insert('prestamo', $dataPrestamo);
+        $prestamo_id = $this->db->insert_id(); // Obtener el ID del préstamo creado
+
+        // Insertar en la tabla `prestamoestudiante` para cada estudiante asociado al préstamo
+        foreach ($dataEstudiantes as &$estudiante) {
+            $estudiante['prestamo_id'] = $prestamo_id;
+        }
+        $this->db->insert_batch('prestamoestudiante', $dataEstudiantes);
+
+        // Insertar en la tabla `prestamoproyecto` para cada proyecto asociado al préstamo
+        foreach ($dataProyectos as &$proyecto) {
+            $proyecto['prestamo_id'] = $prestamo_id;
+        }
+        $this->db->insert_batch('prestamoproyecto', $dataProyectos);
+
+        $this->db->trans_complete();  // Completar transacción
+
+        // Verificar si la transacción fue exitosa
+        if ($this->db->trans_status() === FALSE) {
+            return false;  // Si hubo error, revertir todo
+        }
+
+        return $prestamo_id;  // Retornar el ID del préstamo creado
     }
 
-    // Buscar estudiante por usuario o nombre
-    public function buscar_estudiante($criterio) {
-        $this->db->like('usuario', $criterio);
-        $this->db->or_like('nombre', $criterio);
-        $this->db->or_like('primerApellido', $criterio);
-        $this->db->or_like('segundoApellido', $criterio);
-        $this->db->or_like('ci', $criterio);
-        return $this->db->get('estudiante')->result();
+    // Actualizar el estado del préstamo (para devolver, cancelar, etc.)
+    public function actualizarEstadoPrestamo($id, $estado, $fechaRealDevolucion = null, $observacion = '') {
+        $data = array(
+            'estado' => $estado,
+            'fechaRealDevolucion' => $fechaRealDevolucion,
+            'observacion' => $observacion
+        );
+        $this->db->where('id', $id);
+        return $this->db->update('prestamo', $data); // Actualiza el estado del préstamo
     }
 
-    // Actualizar estado del préstamo
-    public function actualizar_estado_prestamo($idPrestamo, $estado, $data) {
-        $this->db->where('id', $idPrestamo);
-        $this->db->update('prestamoproyecto', array('estado' => $estado, 'observacion' => $data['observacion']));
-    }
-
-    // Obtener datos del préstamo
-    public function obtener_datos_prestamo($idPrestamo) {
-        $this->db->where('id', $idPrestamo);
-        return $this->db->get('prestamo')->row();
+    // Eliminar un préstamo por su ID
+    public function eliminarPrestamo($id) {
+        $this->db->where('id', $id);
+        return $this->db->delete('prestamo'); // Elimina el préstamo
     }
 }
+
+
+
