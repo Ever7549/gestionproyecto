@@ -1,60 +1,3 @@
-<!-- ?php
-class Prestamo_c extends CI_Controller {
-
-    public function __construct() {
-        parent::__construct();
-        $this->load->model('Prestamo_model');
-        $this->load->helper('url');
-    }
-
-    // Mostrar lista de préstamos
-    public function index() {
-        $data['prestamos'] = $this->Prestamo_model->obtener_prestamos();
-        $this->load->view('prestamo_v', $data);
-    }
-
-    // Formulario para crear un nuevo préstamo
-    public function crear() {
-        $this->load->view('crear_prestamo_v');
-    }
-
-    // Guardar nuevo préstamo
-    public function guardar() {
-        $data_prestamo = array(
-            'fechaPrestamo' => date('Y-m-d H:i:s'),
-            'fechaDevolucion' => $this->input->post('fechaDevolucion'),
-            'observacion' => $this->input->post('observacion'),
-            'usuario_id' => $this->input->post('usuario_id')
-        );
-
-        $data_prestamo_estudiante = array(
-            array('estudiante_id' => $this->input->post('estudiante_id'))
-        );
-
-        $data_prestamo_proyecto = array(
-            array('proyecto_id' => $this->input->post('proyecto_id'), 'estado' => 1, 'observacion' => $this->input->post('observacion_proyecto'))
-        );
-
-        $prestamo_id = $this->Prestamo_model->crear_prestamo($data_prestamo, $data_prestamo_estudiante, $data_prestamo_proyecto);
-        if ($prestamo_id) {
-            redirect('prestamo_c');
-        } else {
-            echo "Error al crear el préstamo";
-        }
-    }
-
-    // Ver detalles de un préstamo
-    public function ver($id) {
-        $data['prestamo'] = $this->Prestamo_model->obtener_prestamo_por_id($id);
-        $this->load->view('ver_prestamo_v', $data);
-    }
-
-    // Eliminar un préstamo
-    public function eliminar($id) {
-        $this->Prestamo_model->eliminar_prestamo($id);
-        redirect('prestamo_c');
-    }
-} -- !>
 <?php
 class Prestamo_c extends CI_Controller {
 
@@ -64,22 +7,30 @@ class Prestamo_c extends CI_Controller {
         $this->load->model('Prestamo_model');
         $this->load->model('Proyecto_model');
         $this->load->model('Estudiante_model');
-        session_start();
-        if (empty($_SESSION['activo'])) {
-            redirect(base_url());
-        }
     }
 
     // Método para listar los préstamos de proyectos
     public function listar()
     {
-        // Obtener todos los proyectos, estudiantes y préstamos desde los modelos
+        // Verificar si hay datos almacenados
+        // Si no hay datos, inicializar un arreglo vacío para los préstamos
+        $prestamos = $this->Prestamo_model->obtenerPrestamos();
+        if (empty($prestamos)) {
+            $prestamos = []; // Inicializar como un array vacío si no hay resultados
+        }
+
+        // Obtener todos los proyectos y estudiantes
         $proyectos = $this->Proyecto_model->obtener_proyectos();
         $estudiantes = $this->Estudiante_model->obtener_estudiantes();
-        $prestamos = $this->Prestamo_model->obtener_prestamos();
 
-        // Pasar los datos a la vista
-        $data = ['proyectos' => $proyectos, 'estudiantes' => $estudiantes, 'prestamos' => $prestamos];
+        // Preparar datos para la vista
+        $data = [
+            'proyectos' => $proyectos,
+            'estudiantes' => $estudiantes,
+            'prestamos' => $prestamos
+        ];
+
+        // Cargar la vista de préstamos
         $this->load->view('prestamo_v', $data);
     }
 
@@ -88,24 +39,23 @@ class Prestamo_c extends CI_Controller {
     {
         // Obtener los datos del formulario
         $proyecto_id = $this->input->post('proyecto_id');
-        $estudiante_id = $this->input->post('estudiante_id');
+        $estudiantes = $this->input->post('estudiantes'); // Asumiendo que es un array de IDs de estudiantes
         $fecha_prestamo = $this->input->post('fecha_prestamo');
         $fecha_devolucion = $this->input->post('fecha_devolucion');
         $observacion = $this->input->post('observacion');
 
-        // Registrar el préstamo usando el modelo Prestamo_model
+        // Preparar datos para insertar en la tabla `prestamo`
         $datosPrestamo = [
-            'proyecto_id' => $proyecto_id,
-            'estudiante_id' => $estudiante_id,
-            'fecha_prestamo' => $fecha_prestamo,
-            'fecha_devolucion' => $fecha_devolucion,
-            'observacion' => $observacion
+            'fechaPrestamo' => $fecha_prestamo,
+            'fechaDevolucion' => $fecha_devolucion,
+            'observacion' => $observacion,
+            'estado' => 1 // Estado inicial del préstamo (activo)
         ];
 
-        // Insertar el préstamo en la base de datos
-        $this->Prestamo_model->insertar_prestamo($datosPrestamo);
+        // Insertar el préstamo y obtener el ID generado
+        $prestamo_id = $this->Prestamo_model->insertarPrestamo($datosPrestamo, $estudiantes, [['proyecto_id' => $proyecto_id]]);
 
-        // Redirigir a la página de listado de préstamos
+        // Redirigir a la lista de préstamos con un mensaje de éxito
         redirect(base_url() . 'prestamo_c/listar');
     }
 
@@ -113,16 +63,17 @@ class Prestamo_c extends CI_Controller {
     public function devolver($id_prestamo)
     {
         // Actualizar el estado del préstamo como devuelto
-        $this->Prestamo_model->actualizar_estado_prestamo($id_prestamo, 'devuelto');
+        $fechaRealDevolucion = date('Y-m-d'); // Fecha actual como la fecha de devolución real
+        $this->Prestamo_model->actualizarEstadoPrestamo($id_prestamo, 2, $fechaRealDevolucion); // Estado 2 para devuelto
 
-        // Redirigir a la página de listado de préstamos
+        // Redirigir a la página de listado de préstamos con un mensaje de éxito
         redirect(base_url() . 'prestamo_c/listar');
     }
 
     // Método para generar el PDF de los préstamos
     public function generar_pdf()
     {
-        $prestamos = $this->Prestamo_model->obtener_prestamos();
+        $prestamos = $this->Prestamo_model->obtenerPrestamos();
 
         // Cargar la biblioteca FPDF
         $this->load->library('pdf');
@@ -143,10 +94,10 @@ class Prestamo_c extends CI_Controller {
         // Datos de la tabla
         $pdf->SetFont('Arial', '', 10);
         foreach ($prestamos as $prestamo) {
-            $pdf->Cell(40, 10, $prestamo->nombre_estudiante, 1);
-            $pdf->Cell(60, 10, $prestamo->titulo_proyecto, 1);
-            $pdf->Cell(40, 10, $prestamo->fecha_prestamo, 1);
-            $pdf->Cell(40, 10, $prestamo->fecha_devolucion, 1);
+            $pdf->Cell(40, 10, $prestamo['nombre'], 1);
+            $pdf->Cell(60, 10, $prestamo['titulo'], 1);
+            $pdf->Cell(40, 10, $prestamo['fechaPrestamo'], 1);
+            $pdf->Cell(40, 10, $prestamo['fechaDevolucion'], 1);
             $pdf->Ln();
         }
 
@@ -154,5 +105,3 @@ class Prestamo_c extends CI_Controller {
         $pdf->Output('D', 'prestamos_proyectos.pdf');
     }
 }
-
-
